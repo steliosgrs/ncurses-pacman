@@ -1,6 +1,6 @@
 all : main
 
-test: main.cpp
+test:
 	g++ main.cpp -o main -lncurses
 
 main : main.cpp
@@ -14,5 +14,6 @@ babis: main.cpp
 
 entity: main.cpp
 	g++ main.cpp Game.cpp Babis.cpp Entity.cpp -o main -lncurses
+
 clean : 
-	rm *.o main
+	rm main
