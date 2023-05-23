@@ -1,11 +1,14 @@
 #include "Engine.h"
-
 #include <iostream>
+
 Engine::Engine(const std::string map_filename){
     StartCurses();
     ReadMapFile(map_filename);
     window = newwin(height_map,width_map,0,0);
     GenerateMap();
+    
+    CreateMalfoy();
+    // CreatePotter();
     
     // Refresh the window
     wrefresh(window);
@@ -14,6 +17,7 @@ Engine::Engine(const std::string map_filename){
 
 // Destructor
 Engine::~Engine(){
+    clear();
     werase(window);
     delwin(window);
 }

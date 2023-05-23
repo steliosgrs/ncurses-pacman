@@ -14,6 +14,8 @@ protected:
     char letter;
     char direction;
 
+    // XY coordinates;
+
 
 public:
     Movement(int x, int y, char letter, char direction);
@@ -34,6 +36,7 @@ public:
 
     // Methods
     void move(int x, int y);
+
 
 };
 

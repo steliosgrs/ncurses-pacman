@@ -13,7 +13,7 @@ private:
     std::string map_filename;
     // std::ifstream mapfile;
     std::vector<std::string> mapHandler;
-
+    std:vector<std:int[]> availablePositions;
     int height_map;
     int width_map;
 
