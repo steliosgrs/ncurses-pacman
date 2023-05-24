@@ -1,9 +1,9 @@
 #include "Malfoy.h"
 
-Malfoy::Malfoy(): Moving() {
+Malfoy::Malfoy(int x, int y, char letter): Movement(x, y, letter) {
 
 }
 
-Malfoy::~Malfoy() {
+// Malfoy::~Malfoy() {
     
-}
+// }

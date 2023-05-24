@@ -12,27 +12,27 @@ protected:
     int x;
     int y;
     char letter;
-    char direction;
+    // char direction;
 
     // XY coordinates;
 
 
 public:
-    Movement(int x, int y, char letter, char direction);
+    explicit Movement(int x, int y, char letter);//, char direction);
     // MOVEMENT(const std::string &);
-    ~Movement();
+    virtual ~Movement();
 
     // Getters
     int get_x() const;
     int get_y() const;
     char get_letter() const;
-    char get_direction() const;
+    // char get_direction() const;
 
     // Setters
-    int set_x(int);
-    int set_y(int);
-    char set_letter(char);
-    char set_direction(char);
+    void set_x(int);
+    void set_y(int);
+    void set_letter(char);
+    // char set_direction(char);
 
     // Methods
     void move(int x, int y);

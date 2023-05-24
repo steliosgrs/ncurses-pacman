@@ -1,10 +1,10 @@
 #include "Movement.h"
 
-Movement::Movement(int x, int y, char letter, char direction){
+Movement::Movement(int x, int y, char letter){//, char direction){
     this->x = x;
     this->y = y;
     this->letter = letter;
-    this->direction = direction;
+    // this->direction = direction;
 
 }
 
@@ -15,7 +15,7 @@ Movement::~Movement(){
 void Movement::move(int x, int y){
     keypad(stdscr, TRUE);
     
-    char char_move = getch();
+    int char_move = getch();
 
     switch (char_move)
     {
@@ -60,23 +60,23 @@ char Movement::get_letter() const{
     return letter;
 }
 
-char Movement::get_direction() const{
-    return direction;
-}
+// char Movement::get_direction() const{
+//     return direction;
+// }
 
 // Setters
-int Movement::set_x(int x){
+void Movement::set_x(int x){
     this->x = x;
 }
 
-int Movement::set_y(int y){
+void Movement::set_y(int y){
     this->y = y;
 }
 
-char Movement::set_letter(char letter ){
+void Movement::set_letter(char letter ){
     this->letter = letter;
 }
 
-char Movement::set_direction(char direction){
-    this->direction = direction;
-}
+// char Movement::set_direction(char direction){
+//     this->direction = direction;
+// }

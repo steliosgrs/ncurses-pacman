@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include <iostream>
-
+#include "Malfoy.h"
+#include <new>
 Engine::Engine(const std::string map_filename){
 
     // StartCurses();
@@ -8,7 +9,8 @@ Engine::Engine(const std::string map_filename){
     window = newwin(height_map,width_map,0,0);
     // GenerateMap();
     std::pair<int, int> random_point = PickRandomPosition();
-    // CreateMalfoy();
+    Malfoy malfoy = Malfoy(random_point.first, random_point.second, 'M');//, "i");
+    // CreateMalfoy(random_point);
     // CreatePotter();
     
     // Refresh the window
@@ -62,19 +64,14 @@ void Engine::ReadMapFile(const std::string &file_name){
 
 void Engine::GenerateMap(){
 
-    // char tile;
     for(int row = 0; row < mapHandler.size(); row++)
         for(int col = 0; col < mapHandler[row].size()+1; col++){
-            // tile = mapHandler[row][col];
-            // mvAddItem(row,col,tile)
             if (mapHandler[row][col] == '*' ){
                 mvwaddstr(window,row, col, "*");
             }else if (mapHandler[row][col] == ','){
                 continue;
             } else
                 mvwaddstr(window,row, col, ".");
-                // this->availablePositions.first = row;
-                // this->availablePositions.second = col;
                 availablePositions.push_back(std::make_pair(row, col));
         }
         refresh();
@@ -82,31 +79,17 @@ void Engine::GenerateMap(){
 
 }
 
-// void Engine::PickRandomPosition(){
-
-//     // XY coordinate;
-//     int rows = mapHandler.size();
-//     // cols = mapHandler[0].size();
-//     for(int row = 0; row < mapHandler.size(); row++){
-//         for(int col = 0; col < mapHandler[row].size()+1; col++){
-//             if (mapHandler[row][col] == '.' ){
-//                 XY point = {row,col};
-//                 availablePositions.push_back(point);
-//                 std::cout << "X: "<< point.x << " Y: "<< point.y << std::endl;
-//                 // <>
-//             }
-//         }
-//     }
-//     // for (int i = 0; i < availablePositions.size(); i++){
-//     //     // cout << availablePositions[i] << endl;
-//     //     mvwprintw(window, rows,mapHandler[0],"%d %d" ,availablePositions[i].x, availablePositions[i].y);
-//     // }
-
-// }
-
 std::pair<int, int> Engine::PickRandomPosition(){
 
     int index;
     index = std::rand() * availablePositions.size();
     return availablePositions[index];
 }
+
+// void CreateMalfoy(){
+    
+// }
+
+// void CreateMalfoy(){
+
+// }
