@@ -13,9 +13,14 @@ private:
     std::string map_filename;
     // std::ifstream mapfile;
     std::vector<std::string> mapHandler;
-    std:vector<std:int[]> availablePositions;
     int height_map;
     int width_map;
+    // struct XY{
+    //     int x;
+    //     int y;
+    // };
+    std::vector<std::pair<int, int>> availablePositions;
+    
 
 public:
     Engine(const std::string map_filename);
@@ -24,6 +29,9 @@ public:
     void StartCurses();
     void ReadMapFile(const std::string &);
     void GenerateMap();
+    // XY PickRandomPosition();
+    std::pair<int, int> PickRandomPosition();
+    
 };
 
 #endif
