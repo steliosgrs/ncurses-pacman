@@ -8,44 +8,45 @@ Movement::Movement(int x, int y, char letter){//, char direction){
 
 }
 
-Movement::~Movement(){
-
-}
-
+// Movement::~Movement(){}
 void Movement::move(int x, int y){
-    keypad(stdscr, TRUE);
     
-    int char_move = getch();
-
-    switch (char_move)
-    {
-    case KEY_UP:
-        this->y--;
-        refresh();
-        break;
-    
-    case KEY_DOWN:
-        this->y++;
-        refresh();
-        break;
-    
-    case KEY_RIGHT:
-        this->x++;
-        refresh();
-        break;
-    
-    case KEY_LEFT:
-        this->x--;
-        refresh();
-        break;
-
-    case KEY_EXIT:
-        // refresh();
-        endwin(); 
-        break;
-    
-    }
 }
+
+// void Movement::move(int x, int y){
+//     keypad(stdscr, TRUE);
+    
+//     int char_move = getch();
+
+//     switch (char_move)
+//     {
+//     case KEY_UP:
+//         this->y--;
+//         refresh();
+//         break;
+    
+//     case KEY_DOWN:
+//         this->y++;
+//         refresh();
+//         break;
+    
+//     case KEY_RIGHT:
+//         this->x++;
+//         refresh();
+//         break;
+    
+//     case KEY_LEFT:
+//         this->x--;
+//         refresh();
+//         break;
+
+//     case KEY_EXIT:
+//         // refresh();
+//         endwin(); 
+//         break;
+    
+//     }
+// }
 
 // Getters
 int Movement::get_x() const{

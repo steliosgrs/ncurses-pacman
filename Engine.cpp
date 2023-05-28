@@ -1,15 +1,15 @@
-#include "Engine.h"
 #include <iostream>
+#include "Engine.h"
 #include "Malfoy.h"
-#include <new>
+// #include <new>
 Engine::Engine(const std::string map_filename){
 
     // StartCurses();
     ReadMapFile(map_filename);
     window = newwin(height_map,width_map,0,0);
-    // GenerateMap();
+    GenerateMap();
     std::pair<int, int> random_point = PickRandomPosition();
-    Malfoy malfoy = Malfoy(random_point.first, random_point.second, 'M');//, "i");
+    // Malfoy malfoy = Malfoy(random_point.first, random_point.second, 'M');//, "i");
     // CreateMalfoy(random_point);
     // CreatePotter();
     
@@ -22,6 +22,7 @@ Engine::Engine(const std::string map_filename){
 Engine::~Engine(){
     clear();
     werase(window);
+    endwin(); 
     delwin(window);
 }
 
@@ -31,11 +32,12 @@ void Engine::StartCurses(){
 
     // 
     cbreak();
-
-    // Arrows
-    keypad(stdscr, true);
     noecho();
-    start_color();
+
+    intrflush(stdscr, FALSE);
+    // Arrows
+    keypad(stdscr, TRUE);
+    // start_color();
 
     // Memory refresh
     refresh(); 

@@ -2,9 +2,7 @@
 #define _MOVEMENT_H_
 
 #include <ncurses.h>
-// #include <vector>
 #include <string>
-// #include <fstream>
 
 class Movement{
 
@@ -18,8 +16,7 @@ protected:
 
 
 public:
-    explicit Movement(int x, int y, char letter);//, char direction);
-    // MOVEMENT(const std::string &);
+    Movement(int x, int y, char letter);//, char direction);
     virtual ~Movement();
 
     // Getters
@@ -35,7 +32,8 @@ public:
     // char set_direction(char);
 
     // Methods
-    void move(int x, int y);
+    virtual void move(int x, int y);
+    
 
 
 };

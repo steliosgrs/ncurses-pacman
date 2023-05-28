@@ -10,6 +10,6 @@ int main(int argc, char const *argv[])
 	Engine engine(argv[1]);
 	
     // getch();
-    endwin(); 
+    // endwin(); 
 	return 0;
 }
