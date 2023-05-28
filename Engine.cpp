@@ -7,7 +7,7 @@ Engine::Engine(const std::string map_filename){
     window = newwin(height_map,width_map,0,0);
     GenerateMap();
     
-    CreateMalfoy();
+    // CreateMalfoy();
     // CreatePotter();
     
     // Refresh the window
@@ -20,6 +20,7 @@ Engine::~Engine(){
     clear();
     werase(window);
     delwin(window);
+    endwin(); 
 }
 
 void Engine::StartCurses(){

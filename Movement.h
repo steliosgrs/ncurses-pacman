@@ -29,10 +29,10 @@ public:
     char get_direction() const;
 
     // Setters
-    int set_x(int);
-    int set_y(int);
-    char set_letter(char);
-    char set_direction(char);
+    void set_x(int);
+    void set_y(int);
+    void set_letter(char);
+    void set_direction(char);
 
     // Methods
     void move(int x, int y);

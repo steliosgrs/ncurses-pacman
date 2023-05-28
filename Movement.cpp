@@ -15,7 +15,7 @@ Movement::~Movement(){
 void Movement::move(int x, int y){
     keypad(stdscr, TRUE);
     
-    char char_move = getch();
+    int char_move = getch();
 
     switch (char_move)
     {
@@ -65,18 +65,18 @@ char Movement::get_direction() const{
 }
 
 // Setters
-int Movement::set_x(int x){
+void Movement::set_x(int x){
     this->x = x;
 }
 
-int Movement::set_y(int y){
+void Movement::set_y(int y){
     this->y = y;
 }
 
-char Movement::set_letter(char letter ){
+void Movement::set_letter(char letter ){
     this->letter = letter;
 }
 
-char Movement::set_direction(char direction){
+void  Movement::set_direction(char direction){
     this->direction = direction;
 }
