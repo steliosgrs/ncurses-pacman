@@ -4,10 +4,11 @@
 // #include <new>
 Engine::Engine(const std::string map_filename){
 
-    // StartCurses();
+    StartCurses();
     ReadMapFile(map_filename);
     window = newwin(height_map,width_map,0,0);
     GenerateMap();
+    // std::pair<int, int> random_point = PickRandomPosition();
     
     // CreateMalfoy();
     // CreatePotter();
