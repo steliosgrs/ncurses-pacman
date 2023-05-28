@@ -29,7 +29,7 @@ public:
     void set_x(int);
     void set_y(int);
     void set_letter(char);
-    // char set_direction(char);
+    void set_direction(char);
 
     // Methods
     virtual void move(int x, int y);

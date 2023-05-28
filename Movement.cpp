@@ -16,7 +16,7 @@ void Movement::move(int x, int y){
 // void Movement::move(int x, int y){
 //     keypad(stdscr, TRUE);
     
-//     int char_move = getch();
+    int char_move = getch();
 
 //     switch (char_move)
 //     {
@@ -78,6 +78,6 @@ void Movement::set_letter(char letter ){
     this->letter = letter;
 }
 
-// char Movement::set_direction(char direction){
-//     this->direction = direction;
-// }
+char Movement::set_direction(char direction){
+    this->direction = direction;
+}

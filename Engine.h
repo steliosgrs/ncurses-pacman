@@ -14,8 +14,6 @@ private:
     std::vector<std::string> mapHandler;
     int height_map;
     int width_map;
-    std::vector<std::pair<int, int>> availablePositions;
-    
 
 public:
     Engine(const std::string map_filename);
@@ -23,10 +21,6 @@ public:
     void StartCurses();
     void ReadMapFile(const std::string &);
     void GenerateMap();
-    std::pair<int, int> PickRandomPosition();
-    // void CreateMalfoy();
-    // void CreatePotter();
-    
 };
 
 #endif

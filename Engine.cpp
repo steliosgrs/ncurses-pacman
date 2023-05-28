@@ -8,9 +8,8 @@ Engine::Engine(const std::string map_filename){
     ReadMapFile(map_filename);
     window = newwin(height_map,width_map,0,0);
     GenerateMap();
-    std::pair<int, int> random_point = PickRandomPosition();
-    // Malfoy malfoy = Malfoy(random_point.first, random_point.second, 'M');//, "i");
-    // CreateMalfoy(random_point);
+    
+    // CreateMalfoy();
     // CreatePotter();
     
     // Refresh the window
@@ -24,6 +23,7 @@ Engine::~Engine(){
     werase(window);
     endwin(); 
     delwin(window);
+    endwin(); 
 }
 
 void Engine::StartCurses(){
