@@ -4,47 +4,50 @@ Movement::Movement(int x, int y, char letter){
     this->x = x;
     this->y = y;
     this->letter = letter;
-
 }
 
 Movement::~Movement(){
-
 }
 
 void Movement::move(int x, int y){
-    keypad(stdscr, TRUE);
+    // keypad(stdscr, TRUE);
     
-    int char_move = getch();
+    // int char_move = getch();
 
-    switch (char_move)
-    {
-    case KEY_UP:
-        this->y--;
-        refresh();
-        break;
+    // switch (char_move)
+    // {
+    // case KEY_UP:
+    //     this->y--;
+    //     refresh();
+    //     break;
     
-    case KEY_DOWN:
-        this->y++;
-        refresh();
-        break;
+    // case KEY_DOWN:
+    //     this->y++;
+    //     refresh();
+    //     break;
     
-    case KEY_RIGHT:
-        this->x++;
-        refresh();
-        break;
+    // case KEY_RIGHT:
+    //     this->x++;
+    //     refresh();
+    //     break;
     
-    case KEY_LEFT:
-        this->x--;
-        refresh();
-        break;
+    // case KEY_LEFT:
+    //     this->x--;
+    //     refresh();
+    //     break;
 
-    case KEY_EXIT:
-        // refresh();
-        endwin(); 
-        break;
+    // case KEY_EXIT:
+    //     // refresh();
+    //     endwin(); 
+    //     break;
     
-    }
+    // }
 }
+
+// void display(WINDOW* win, int y, int x, char letter){
+//     mvwaddch(win, y, x, letter);
+
+// }
 
 // Getters
 int Movement::get_x() const{

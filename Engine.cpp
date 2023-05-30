@@ -1,21 +1,43 @@
 #include <iostream>
 #include "Engine.h"
 #include "Malfoy.h"
-// #include <new>
+#include <time.h>
+#include <new>
+#include <random>
+#include <time.h>
+
 Engine::Engine(const std::string map_filename){
 
     StartCurses();
     ReadMapFile(map_filename);
     window = newwin(height_map,width_map,0,0);
     GenerateMap();
-    // std::pair<int, int> random_point = PickRandomPosition();
-    
+    std::pair<int, int> random_point = PickRandomPosition();
+    Malfoy* player = new Malfoy(random_point.second, random_point.first, 'M');
+    std::pair<int, int>  start_Malfoy = availablePositions.front();
+    std::pair<int, int>  start_Potter = availablePositions.back();
+
+    mvwaddch(window,  player->get_y(), player->get_x()/2, player->get_letter());
+    // std::cout << player->get_x()/2 << " " << player->get_y() << std::endl;
+    // diplay_Malfoy(this->window,  player->get_y(), player->get_x()/2, player->get_letter());
+    // mvwaddch(window, 19, 78, 'M');
     // CreateMalfoy();
     // CreatePotter();
+    srand(time(0));
+    int rand_X = rand_int(xMax);
+    int rand_Y = rand_int(yMax);
+    std::cout << "X" << rand_X << " Y" << rand_Y << std::endl;
+    // while (player->)
+    // {
+    //     /* code */
+    // }
+    
     
     // Refresh the window
     wrefresh(window);
+    // getch();
 
+    delete player;
 }
 
 // Destructor
@@ -30,20 +52,14 @@ Engine::~Engine(){
 void Engine::StartCurses(){
     // Initialize the screen, setup memory
     initscr(); 
-
     // 
-    cbreak();
     noecho();
-
+    cbreak();
     intrflush(stdscr, FALSE);
     // Arrows
     keypad(stdscr, TRUE);
-    // start_color();
-
     // Memory refresh
     refresh(); 
-    // halfdelay(5);
-    // renderer = new Renderer(&levelMap);
 }
 
 void Engine::ReadMapFile(const std::string &file_name){
@@ -66,28 +82,67 @@ void Engine::ReadMapFile(const std::string &file_name){
 }
 
 void Engine::GenerateMap(){
-
-    for(int row = 0; row < mapHandler.size(); row++)
+    yMax = xMax = 0 ;
+    for(int row = 0; row < mapHandler.size(); row++){
         for(int col = 0; col < mapHandler[row].size()+1; col++){
             if (mapHandler[row][col] == '*' ){
-                mvwaddstr(window,row, col, "*");
+                // mvwaddstr(window,row, col, "*");
+                mvwaddch(window,row, col, '*');
             }else if (mapHandler[row][col] == ','){
                 continue;
             } else
-                mvwaddstr(window,row, col, ".");
-                availablePositions.push_back(std::make_pair(row, col));
+                // mvwaddstr(window,row, col, ".");
+                mvwaddch(window,row, col,'.');
+                availablePositions.push_back(std::make_pair(row,col));
+            // if (col == 0){
+            //     xMax++;
+            // }
         }
-        refresh();
-        
+        // std::cout << xMax << std::endl;
+        // std::cout << row << std::endl;
+        yMax++;
 
+    }
+
+    xMax = mapHandler[0].size()-1;
+    std::cout << xMax << std::endl;
+    refresh();
+
+}
+int Engine::rand_int(int max) {
+    return ((int)rand() / ((int)RAND_MAX + 1.0)) * (max - 1);
 }
 
 std::pair<int, int> Engine::PickRandomPosition(){
 
     int index;
-    index = std::rand() * availablePositions.size();
-    return availablePositions[index];
+    // std::cout << rand() << std::endl;
+    int rand_num = rand() % availablePositions.size();
+    // std::cout << "Rand "<<rand_num << std::endl;
+    for (int i = 0; i < availablePositions.size(); i++){
+        if (i == rand_num){
+            return availablePositions[i];
+        }
+    }
 }
+
+// void display(WINDOW* win, int y, int x, char letter){
+//     mvwaddch(win, y, x, letter);
+// }
+
+
+// int Engine::rand_int(int max) {
+// /* return a random number between 0 and max */
+
+//     int divisor = RAND_MAX/(max+1);
+//     int retval;
+
+//     do { 
+//         retval = rand() / divisor;
+//     } while (retval > max);
+
+//     return retval;
+// }
 
 // void CreateMalfoy(){
     

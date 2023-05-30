@@ -10,14 +10,14 @@ protected:
     int x;
     int y;
     char letter;
+    int xMax;
+    int yMax;
     // char direction;
-
-    // XY coordinates;
-
 
 public:
     Movement(int x, int y, char letter);//, char direction);
-    virtual ~Movement();
+    // virtual ~Movement();
+    ~Movement();
 
     // Getters
     int get_x() const;
@@ -33,9 +33,6 @@ public:
 
     // Methods
     virtual void move(int x, int y);
-    
-
-
 };
 
 

@@ -14,6 +14,8 @@ private:
     std::vector<std::string> mapHandler;
     int height_map;
     int width_map;
+    int yMax;
+    int xMax;
     std::vector<std::pair<int, int>> availablePositions;
 
 public:
@@ -23,6 +25,11 @@ public:
     void ReadMapFile(const std::string &);
     void GenerateMap();
     std::pair<int, int> PickRandomPosition();
+
+    // void diplay_Malfoy(WINDOW*, int, int, char);
+    // void diplay_Malfoy(WINDOW*, int, int, char);
+    // void diplay_Malfoy(WINDOW*, int, int, char);
+    int rand_int(int);
 };
 
 #endif
