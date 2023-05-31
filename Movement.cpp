@@ -9,7 +9,7 @@ Movement::Movement(int x, int y, char letter){
 Movement::~Movement(){
 }
 
-void Movement::move(int x, int y){
+int Movement::move(int x, int y){
     // keypad(stdscr, TRUE);
     
     // int char_move = getch();

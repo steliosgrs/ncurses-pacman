@@ -5,11 +5,13 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include "Malfoy.h"
 
 class Engine{
 
 private:
     WINDOW *window;
+    Malfoy *player;
     std::string map_filename;
     std::vector<std::string> mapHandler;
     int height_map;
@@ -19,6 +21,7 @@ private:
     std::vector<std::pair<int, int>> availablePositions;
 
 public:
+    // using Malfoy::Malfoy;
     Engine(const std::string map_filename);
     ~Engine();
     void StartCurses();
@@ -27,9 +30,8 @@ public:
     std::pair<int, int> PickRandomPosition();
 
     // void diplay_Malfoy(WINDOW*, int, int, char);
-    // void diplay_Malfoy(WINDOW*, int, int, char);
-    // void diplay_Malfoy(WINDOW*, int, int, char);
     int rand_int(int);
+    // void display_Malfoy(Malfoy*);
 };
 
 #endif

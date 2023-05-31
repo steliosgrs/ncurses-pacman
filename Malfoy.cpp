@@ -7,7 +7,7 @@ Malfoy::Malfoy(int x, int y, char letter): Movement(x, y, letter) {
 
 // Malfoy::~Malfoy() {}
 
-void Malfoy::move(int x, int y){
+int Malfoy::move(int x, int y){
     keypad(stdscr, TRUE);
     
     int char_move = getch();

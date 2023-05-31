@@ -32,7 +32,8 @@ public:
     void set_direction(char);
 
     // Methods
-    virtual void move(int x, int y);
+    virtual int move(int x, int y);
+    
 };
 
 

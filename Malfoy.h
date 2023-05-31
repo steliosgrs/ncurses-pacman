@@ -14,7 +14,7 @@ public:
     // // Getters
     // // Setters
     // // Methods
-    void move(int x, int y);
+    int move(int x, int y);
     
 
 };
