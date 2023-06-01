@@ -25,7 +25,9 @@ Engine::Engine(const std::string map_filename){
     srand(time(0));
     int rand_X = rand_int(xMax);
     int rand_Y = rand_int(yMax);
-    while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' '){
+
+    while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == '.'){
+    // while (mapHandler[rand_Y][rand_X] != ' '){
         rand_X = rand_int(xMax);
         rand_Y = rand_int(yMax);
         // std::cout << rand_Y << " " << rand_X << std::endl;
@@ -33,32 +35,34 @@ Engine::Engine(const std::string map_filename){
     }
     // std::cout << "X" << rand_X << " Y" << rand_Y << std::endl;
     //                              Y               ,       X
-    player = new Malfoy(rand_X, rand_Y, 'M');
+    player = new Malfoy(rand_X, rand_Y);
     // mvwaddch(window,player->get_y(),player->get_x(), player->get_letter());
     mvaddch(player->get_y(),player->get_x(), player->get_letter());
-    // mvaddch(4,42, 'm');
     // display_Malfoy(player);
 
     // Check Move
     // while (player->move(player->get_x(), player->get_y()) != KEY_EXIT){
     //     // player->get_y() = rand_Y;
     //     // player->get_x() = rand_X;
-    // // // mvwaddch(window, 19, 78, 'M');
-    //     display_Malfoy(player);
+    //     // mvwaddch(window,player->get_y(),player->get_x(), player->get_letter());
+    //     int move = player->move(player->get_x(), player->get_y());
+
+    //     // erase_
+
+    //     display_Malfoy(move);
+        
     //     wrefresh(window);
     // }
-
-    
-
-    // while (player->move() != KEY_EXIT){
-
-    // }
-    
-    
+    int move;
+    do {
+        int x = player->get_x();
+        int y = player->get_y();
+        move = player->move(x, y);
+        display_Malfoy(move, y, x);
+        wrefresh(window);
+    } while ( move != KEY_EXIT);
     // Refresh the window
     wrefresh(window);
-    // getch();
-
     delete player;
 }
 
@@ -108,15 +112,12 @@ void Engine::GenerateMap(){
     for(int row = 0; row < mapHandler.size(); row++){
         for(int col = 0; col < mapHandler[row].size()+1; col++){
             if (mapHandler[row][col] == '*' ){
-                // mvwaddstr(window,row, col, "*");
                 mvwaddch(window,row, col, '*');
             }else if (mapHandler[row][col] == ','){
                 // mvwaddch(window,row, col,' ');
-                // mvaddch(row, col,' ');
                 continue;
             } else
-                // mvwaddstr(window,row, col, ".");
-                mvwaddch(window,row, col,' ');
+                mvwaddch(window,row, col,'.');
                 availablePositions.push_back(std::make_pair(row,col));
             // if (col == 0){
             //     xMax++;
@@ -137,6 +138,17 @@ int Engine::rand_int(int max) {
     return ((int)rand() / ((int)RAND_MAX + 1.0)) * (max - 1);
 }
 
+bool Engine::check_collisions(int x, int y){
+    bool valid_move = false;
+    if (mapHandler[y][x] == '*' ){
+        valid_move = true;
+        return valid_move;
+    }else {
+        return valid_move;
+    }
+
+}
+
 std::pair<int, int> Engine::PickRandomPosition(){
 
     int index;
@@ -150,27 +162,33 @@ std::pair<int, int> Engine::PickRandomPosition(){
     }
 }
 
-// void display(WINDOW* win, int y, int x, char letter){
-//     mvwaddch(win, y, x, letter);
-// }
+void Engine::display_Malfoy(int move, int y, int x){
+    keypad(stdscr, TRUE);
+    mvwaddch(this->window,this->player->get_y(),this->player->get_x(), this->player->get_letter());
+    // std::cout << this->player->get_y() <<y << y+1<< std::endl;
+    switch (move){
+    case KEY_UP:
+        mvaddch(y-1,x, '.');
+    std::cout << this->player->get_y() <<y << y+1<< std::endl;
+        refresh();
+        break;
+    case KEY_DOWN:
+        mvaddch(y-1,x, '.');
+        refresh();
+        break;
+    
+    case KEY_RIGHT:
+        mvaddch(y,x-1, '.');
+        wrefresh(window);
+        break;
+    
+    case KEY_LEFT:
+        mvaddch(y,x+1, '.');
+        refresh();
+        break;
+    }
+}
 
-
-// int Engine::rand_int(int max) {
-// /* return a random number between 0 and max */
-
-//     int divisor = RAND_MAX/(max+1);
-//     int retval;
-
-//     do { 
-//         retval = rand() / divisor;
-//     } while (retval > max);
-
-//     return retval;
-// }
-
-// void Engine::display_Malfoy(player){
-//     mvwaddch(window, player->get_y(), player->get_x(), player->get_letter() );
-// }
 
 // void CreateMalfoy(){
 

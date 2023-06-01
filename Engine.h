@@ -29,8 +29,10 @@ public:
     void GenerateMap();
     std::pair<int, int> PickRandomPosition();
 
-    // void diplay_Malfoy(WINDOW*, int, int, char);
+    void display_Malfoy(int, int, int);
     int rand_int(int);
+    bool check_collisions(int, int);
+    
     // void display_Malfoy(Malfoy*);
 };
 

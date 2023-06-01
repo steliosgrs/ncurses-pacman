@@ -8,7 +8,7 @@ class Malfoy: public Movement{
 
 public:
     using Movement::Movement;
-    Malfoy(int x, int y, char letter);
+    Malfoy(int x, int y, char letter = 'M');
     // ~Malfoy();
 
     // // Getters

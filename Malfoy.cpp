@@ -2,7 +2,7 @@
 
 // Malfoy::Malfoy(): Movement() {
 // }
-Malfoy::Malfoy(int x, int y, char letter): Movement(x, y, letter) {
+Malfoy::Malfoy(int x, int y, char letter): Movement(x, y, 'M') {
 }
 
 // Malfoy::~Malfoy() {}
@@ -15,23 +15,31 @@ int Malfoy::move(int x, int y){
     switch (char_move)
     {
     case KEY_UP:
-        this->y--;
-        refresh();
+        // if (check_collisions(this->x, this->y--) == true){
+            this->y--;
+            refresh();
+
+
+        // }
+        
         break;
     
     case KEY_DOWN:
-        this->y++;
-        refresh();
+        // check_collisions(this->x, this->y++);
+            this->y++;
+            refresh();
         break;
     
     case KEY_RIGHT:
-        this->x+2;
-        refresh();
+        // check_collisions(this->x, this->y++);
+            this->x+=1;
+            refresh();
         break;
     
     case KEY_LEFT:
-        this->x-2;
-        refresh();
+        // check_collisions(this->x, this->y++);
+            this->x=x-1;
+            refresh();
         break;
 
     case KEY_EXIT:
@@ -40,5 +48,6 @@ int Malfoy::move(int x, int y){
         break;
     
     }
-
+    return char_move;
 }
+
