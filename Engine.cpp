@@ -31,9 +31,6 @@ Engine::Engine(const std::string map_filename){
         int y = player->get_y();
         display_Malfoy(move, y, x);
         move = player->move(x, y);
-        // do {
-
-        // } while ();
         wrefresh(window);
     } while ( move != 27);
     // Refresh the window
@@ -155,6 +152,32 @@ void Engine::display_Malfoy(int move, int y, int x){
             }
             break;
         }
+                mvaddch(y, x, this->player->get_letter());
+    
+    // mvaddch(y, x, this->player->get_letter());
+    // }
+    // wrefresh(window);
+}
+
+void Engine::display_Malfoy(int move, int y, int x){
+    bool valid_move;
+    switch (move){
+        case KEY_UP:
+            mvaddch(y+1,x, ' ');
+            break;
+        case KEY_DOWN:
+            mvaddch(y-1,x, ' ');
+            break;
+        
+        case KEY_RIGHT:
+            mvaddch(y,x-1, ' ');
+            break;
+        
+        case KEY_LEFT:
+            mvaddch(y,x+1, ' ');
+            break;
+        }
+        mvaddch(y, x, this->player->get_letter());
     
     // mvaddch(y, x, this->player->get_letter());
     // }
