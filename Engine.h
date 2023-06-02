@@ -21,19 +21,16 @@ private:
     std::vector<std::pair<int, int>> availablePositions;
 
 public:
-    // using Malfoy::Malfoy;
     Engine(const std::string map_filename);
     ~Engine();
     void StartCurses();
     void ReadMapFile(const std::string &);
     void GenerateMap();
-    std::pair<int, int> PickRandomPosition();
+    // std::pair<int, int> PickRandomPosition();
 
     void display_Malfoy(int, int, int);
     int rand_int(int);
-    bool check_collisions(int, int);
-    
-    // void display_Malfoy(Malfoy*);
+    bool check_collisions(int, int, int);
 };
 
 #endif

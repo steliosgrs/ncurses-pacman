@@ -33,7 +33,6 @@ public:
 
     // Methods
     virtual int move(int x, int y);
-    // bool check_collisions();
     
 };
 
