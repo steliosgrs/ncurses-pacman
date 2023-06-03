@@ -41,12 +41,28 @@ Engine::Engine(const std::string map_filename){
     //     }
     //     wrefresh(window);
     // } while ( move != 27);
-
+    bool valid = true;
     while ( move != 27){
         int x = player->get_x();
         int y = player->get_y();
         display_Malfoy(move, y, x);
         move = player->move(x, y);
+        /*
+        do {
+            move = player->move(x, y);
+
+            for (int i = 0; i < notAvailablePositions.size(); i++)
+            {
+                int pos_y = notAvailablePositions[i].first; 
+                int pos_x = notAvailablePositions[i].second;
+                if (pos_y == y and pos_x == x){
+                    valid = false;
+                }
+            }
+            
+        }while (valid == true);
+        */
+
         if (move == 27){
             break;
         }
