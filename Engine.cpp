@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Engine.h"
-#include "Malfoy.h"
+// #include "Malfoy.h"
 #include <time.h>
 #include <new>
 #include <random>
@@ -17,20 +17,24 @@ Engine::Engine(const std::string map_filename){
     int rand_X; 
     int rand_Y; 
 
-    do{
-        rand_X = rand_int(xMax);
-        rand_Y = rand_int(yMax);
+    // do{
+    //     rand_X = rand_int(xMax);
+    //     rand_Y = rand_int(yMax);
 
-    }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
-
+    // }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
+    GenerateMalfoy();
+    GeneratePotter(rand_X, rand_Y);
+    // GenerateGem(rand_X, rand_Y);
+    /*
     player = new Malfoy(rand_X, rand_Y);
     player->set_xMax(xMax);
     player->set_yMax(yMax);
     mvaddch(player->get_y(), player->get_x(), this->player->get_letter());
+    */
 
     // Check Move
     int move = 0;
-    
+    // ====== Working ======
     // do {
     //     int x = player->get_x();
     //     int y = player->get_y();
@@ -41,13 +45,37 @@ Engine::Engine(const std::string map_filename){
     //     }
     //     wrefresh(window);
     // } while ( move != 27);
-    bool valid = true;
+    int pos_y, pos_x, x, y;
+    
+
+    bool not_valid = true;
     while ( move != 27){
-        int x = player->get_x();
-        int y = player->get_y();
+        x = player->get_x();
+        y = player->get_y();
         display_Malfoy(move, y, x);
         move = player->move(x, y);
         /*
+        do {
+
+            move = player->move(x, y);
+            if (mapHandler[player->get_y()].at(player->get_x()) == '*'){
+
+            }
+            // for (int i = 0; i < notAvailablePositions.size(); i++)
+            // {
+            //     pos_y = notAvailablePositions[i].first; 
+            //     pos_x = notAvailablePositions[i].second;
+            //     if ((pos_y == y) or (pos_x == x)){
+            //         not_valid = true;
+            //     }
+            //     else{
+            //         not_valid = false;
+            //     }
+            // }
+            
+        } while (not_valid);
+        
+        
         do {
             move = player->move(x, y);
 
@@ -143,6 +171,34 @@ int Engine::rand_int(int max) {
     return ((int)rand() / ((int)RAND_MAX + 1.0)) * (max - 1);
 }
 
+// void Engine::GenerateMalfoy(int rand_X, int rand_Y){
+void Engine::GenerateMalfoy(){
+    int rand_X; 
+    int rand_Y; 
+
+    do{
+        rand_X = rand_int(xMax);
+        rand_Y = rand_int(yMax);
+
+    }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
+    
+    player = new Malfoy(rand_X, rand_Y);
+    player->set_xMax(xMax);
+    player->set_yMax(yMax);
+    mvaddch(player->get_y(), player->get_x(), this->player->get_letter());
+}
+void Engine::GeneratePotter(int rand_X, int rand_Y){
+    bot_potter = new Potter(rand_X, rand_Y);
+    bot_potter->set_xMax(xMax);
+    bot_potter->set_yMax(yMax);
+    mvaddch(bot_potter->get_y(), bot_potter->get_x(), this->bot_potter->get_letter());
+}
+void Engine::GenerateGem(int rand_X, int rand_Y){
+    player = new Malfoy(rand_X, rand_Y);
+    player->set_xMax(xMax);
+    player->set_yMax(yMax);
+    mvaddch(player->get_y(), player->get_x(), this->player->get_letter());
+}
 bool Engine::check_collisions(int move, int x, int y){
     bool valid_move = false;
     if (mapHandler[y][x] == '*' ){
@@ -159,7 +215,7 @@ void Engine::display_Malfoy(int move, int y, int x){
     bool valid_move;
     switch (move){
         case KEY_UP:
-            // if (--y < 0)
+            
             mvaddch(y+1,x, ' ');
             break;
         case KEY_DOWN:

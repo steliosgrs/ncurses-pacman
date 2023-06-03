@@ -12,5 +12,8 @@ malfoy: main.cpp
 potter: main.cpp
 	g++ main.cpp Engine.cpp Movement.cpp Malfoy.cpp Potter.cpp -o main -lncurses
 
+gem: main.cpp
+	g++ main.cpp Engine.cpp Movement.cpp Malfoy.cpp Potter.cpp Gem.cpp -o main -lncurses
+
 clean : 
 	rm main

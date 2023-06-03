@@ -6,12 +6,14 @@
 #include <string>
 #include <fstream>
 #include "Malfoy.h"
+#include "Potter.h"
 
 class Engine{
 
 private:
     WINDOW *window;
     Malfoy *player;
+    Potter *bot_potter;
     std::string map_filename;
     std::vector<std::string> mapHandler;
     int height_map;
@@ -27,6 +29,10 @@ public:
     void StartCurses();
     void ReadMapFile(const std::string &);
     void GenerateMap();
+    void GenerateMalfoy();
+    // void GenerateMalfoy(int, int);
+    void GeneratePotter(int, int);
+    void GenerateGem(int, int);
     // std::pair<int, int> PickRandomPosition();
 
     void display_Malfoy(int, int, int);

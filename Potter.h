@@ -7,14 +7,10 @@
 class Potter: public Movement{
 
 public:
-    using Movement::Movement;
-    Potter(int x, int y, char letter);
+    Potter(int x, int y, char letter = 'P');
     // ~Malfoy();
 
-    // // Getters
-    // // Setters
-    // // Methods
-    // void move(int x, int y);
+    int move(int, int);
     
 };
 
