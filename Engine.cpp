@@ -117,7 +117,7 @@ bool Engine::check_collisions(int move, int x, int y){
     }
 
 }
-
+/*
 void Engine::display_Malfoy(int move, int y, int x){
     bool valid_move;
     switch (move){
@@ -157,7 +157,7 @@ void Engine::display_Malfoy(int move, int y, int x){
     // mvaddch(y, x, this->player->get_letter());
     // }
     // wrefresh(window);
-}
+}*/
 
 void Engine::display_Malfoy(int move, int y, int x){
     bool valid_move;
