@@ -22,28 +22,47 @@ Engine::Engine(const std::string map_filename){
         rand_Y = rand_int(yMax);
 
     }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
+
     player = new Malfoy(rand_X, rand_Y);
+    player->set_xMax(xMax);
+    player->set_yMax(yMax);
+    mvaddch(player->get_y(), player->get_x(), this->player->get_letter());
 
     // Check Move
-    int move;
-    do {
+    int move = 0;
+    
+    // do {
+    //     int x = player->get_x();
+    //     int y = player->get_y();
+    //     display_Malfoy(move, y, x);
+    //     move = player->move(x, y);
+    //     if (move == 27){
+    //         break;
+    //     }
+    //     wrefresh(window);
+    // } while ( move != 27);
+
+    while ( move != 27){
         int x = player->get_x();
         int y = player->get_y();
         display_Malfoy(move, y, x);
         move = player->move(x, y);
+        if (move == 27){
+            break;
+        }
         wrefresh(window);
-    } while ( move != 27);
+    } 
     // Refresh the window
-    wrefresh(window);
+    // wrefresh(window);
     delete player;
 }
 
 // Destructor
 Engine::~Engine(){
-    clear();
-    werase(window);
-    // endwin(); 
     delwin(window);
+    clear();
+    // werase(window);
+    // endwin(); 
     endwin(); 
 }
 
@@ -89,8 +108,8 @@ void Engine::GenerateMap(){
             if (mapHandler[row][col] == '*' ){
                 mvwaddch(window,row, col, '*');
             }else if (mapHandler[row][col] == ','){
-                // mvwaddch(window,row, col,' ');
-                continue;
+                // mvaddch(row, col,' ');
+                // continue;
             } else
                 mvwaddch(window,row, col,' ');
                 availablePositions.push_back(std::make_pair(row,col));
@@ -98,8 +117,8 @@ void Engine::GenerateMap(){
         yMax++;
 
     }
-
     xMax = mapHandler[0].size()-1;
+    // std::cout << "xmax:" <<xMax << "ymax:"<< yMax << std::endl;
     wrefresh(window);
 
 }
@@ -117,52 +136,13 @@ bool Engine::check_collisions(int move, int x, int y){
     }
 
 }
-/*
-void Engine::display_Malfoy(int move, int y, int x){
-    bool valid_move;
-    switch (move){
-        case KEY_UP:
-            // valid_move = check_collisions(move, x, y);
-            if (check_collisions(move, x, y-1)){
-                mvaddch(y+1,x, ' ');
-                mvaddch(y, x, this->player->get_letter());
-            }
-                break;
-        case KEY_DOWN:
-            // valid_move = check_collisions(move, x, y);
-            if (check_collisions(move, x, y+1)){
-                mvaddch(y-1,x, ' ');
-                mvaddch(y, x, this->player->get_letter());
-            }
-            break;
-        
-        case KEY_RIGHT:
-            // valid_move = check_collisions(move, x, y);
-            if (check_collisions(move, x+1, y)){
-                mvaddch(y,x-1, ' ');
-                mvaddch(y, x, this->player->get_letter());
-            }
-            break;
-        
-        case KEY_LEFT:
-            // valid_move = check_collisions(move, x, y);
-            if (check_collisions(move, x-1, y)){
-                mvaddch(y,x+1, ' ');
-                mvaddch(y, x, this->player->get_letter());
-            }
-            break;
-        }
-                mvaddch(y, x, this->player->get_letter());
-    
-    // mvaddch(y, x, this->player->get_letter());
-    // }
-    // wrefresh(window);
-}*/
+
 
 void Engine::display_Malfoy(int move, int y, int x){
     bool valid_move;
     switch (move){
         case KEY_UP:
+            // if (--y < 0)
             mvaddch(y+1,x, ' ');
             break;
         case KEY_DOWN:
@@ -177,8 +157,8 @@ void Engine::display_Malfoy(int move, int y, int x){
             mvaddch(y,x+1, ' ');
             break;
         }
-        mvaddch(y, x, this->player->get_letter());
     
+    mvaddch(y, x, this->player->get_letter());
     // mvaddch(y, x, this->player->get_letter());
     // }
     // wrefresh(window);
