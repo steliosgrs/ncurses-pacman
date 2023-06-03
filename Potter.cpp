@@ -5,7 +5,7 @@
 
 // Potter::Potter(): Movement() {
 // }
-Potter::Potter(int x, int y, char letter): Movement(x, y, 'P') {
+Potter::Potter(int x, int y, char letter): Movement(x, y, 'M') {
 }
 
 // Potter::~Potter() {}

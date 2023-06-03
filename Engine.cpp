@@ -23,8 +23,9 @@ Engine::Engine(const std::string map_filename){
 
     // }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
     GenerateMalfoy();
-    GeneratePotter(rand_X, rand_Y);
-    // GenerateGem(rand_X, rand_Y);
+    GeneratePotter();
+    GenerateGem();
+
     /*
     player = new Malfoy(rand_X, rand_Y);
     player->set_xMax(xMax);
@@ -187,14 +188,31 @@ void Engine::GenerateMalfoy(){
     player->set_yMax(yMax);
     mvaddch(player->get_y(), player->get_x(), this->player->get_letter());
 }
-void Engine::GeneratePotter(int rand_X, int rand_Y){
+void Engine::GeneratePotter(){
+    int rand_X; 
+    int rand_Y; 
+
+    do{
+        rand_X = rand_int(xMax);
+        rand_Y = rand_int(yMax);
+
+    }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
+    
     bot_potter = new Potter(rand_X, rand_Y);
     bot_potter->set_xMax(xMax);
     bot_potter->set_yMax(yMax);
     mvaddch(bot_potter->get_y(), bot_potter->get_x(), this->bot_potter->get_letter());
 }
-void Engine::GenerateGem(int rand_X, int rand_Y){
-    player = new Malfoy(rand_X, rand_Y);
+void Engine::GenerateGem(){
+    int rand_X; 
+    int rand_Y; 
+
+    do{
+        rand_X = rand_int(xMax);
+        rand_Y = rand_int(yMax);
+
+    }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
+    player = new Gem(rand_X, rand_Y);
     player->set_xMax(xMax);
     player->set_yMax(yMax);
     mvaddch(player->get_y(), player->get_x(), this->player->get_letter());

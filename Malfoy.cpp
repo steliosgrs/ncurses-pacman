@@ -5,7 +5,7 @@
 
 // Malfoy::Malfoy(): Movement() {
 // }
-Malfoy::Malfoy(int x, int y, char letter): Movement(x, y, 'M') {
+Malfoy::Malfoy(int x, int y, char letter): Movement(x, y, 'L') {
 }
 
 // Malfoy::~Malfoy() {}

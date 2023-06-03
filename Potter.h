@@ -7,7 +7,7 @@
 class Potter: public Movement{
 
 public:
-    Potter(int x, int y, char letter = 'P');
+    Potter(int x, int y, char letter = 'M');
     // ~Malfoy();
 
     int move(int, int);

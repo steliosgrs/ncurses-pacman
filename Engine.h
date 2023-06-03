@@ -31,8 +31,8 @@ public:
     void GenerateMap();
     void GenerateMalfoy();
     // void GenerateMalfoy(int, int);
-    void GeneratePotter(int, int);
-    void GenerateGem(int, int);
+    void GeneratePotter();
+    void GenerateGem();
     // std::pair<int, int> PickRandomPosition();
 
     void display_Malfoy(int, int, int);
