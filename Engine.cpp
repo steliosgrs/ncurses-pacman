@@ -212,10 +212,10 @@ void Engine::GenerateGem(){
         rand_Y = rand_int(yMax);
 
     }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
-    player = new Gem(rand_X, rand_Y);
-    player->set_xMax(xMax);
-    player->set_yMax(yMax);
-    mvaddch(player->get_y(), player->get_x(), this->player->get_letter());
+    gem = new Gem(rand_X, rand_Y);
+    // gem->set_xMax(xMax);
+    // gem->set_yMax(yMax);
+    // mvaddch(gem->get_y(), gem->get_x(), this->gem->get_letter());
 }
 bool Engine::check_collisions(int move, int x, int y){
     bool valid_move = false;

@@ -7,11 +7,14 @@ private:
     int x;
     int y;
     char letter;
+    int xMax;
+    int yMax;
 public:
 
     // Constucturor
     Gem(int, int, char = 'G');
     ~Gem();
+    
     void spawn();
 
 };

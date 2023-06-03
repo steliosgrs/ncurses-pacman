@@ -7,6 +7,7 @@
 #include <fstream>
 #include "Malfoy.h"
 #include "Potter.h"
+#include "Gem.h"
 
 class Engine{
 
@@ -14,6 +15,7 @@ private:
     WINDOW *window;
     Malfoy *player;
     Potter *bot_potter;
+    Gem *gem;
     std::string map_filename;
     std::vector<std::string> mapHandler;
     int height_map;
