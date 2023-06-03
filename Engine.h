@@ -19,6 +19,7 @@ private:
     int yMax;
     int xMax;
     std::vector<std::pair<int, int>> availablePositions;
+    std::vector<std::pair<int, int>> notAvailablePositions;
 
 public:
     Engine(const std::string map_filename);

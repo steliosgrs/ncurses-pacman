@@ -107,6 +107,7 @@ void Engine::GenerateMap(){
         for(int col = 0; col < mapHandler[row].size()+1; col++){
             if (mapHandler[row][col] == '*' ){
                 mvwaddch(window,row, col, '*');
+                notAvailablePositions.push_back(std::make_pair(row,col));
             }else if (mapHandler[row][col] == ','){
                 // mvaddch(row, col,' ');
                 // continue;
