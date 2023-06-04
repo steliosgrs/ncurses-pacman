@@ -22,6 +22,8 @@ private:
     int width_map;
     int yMax;
     int xMax;
+    int rand_X;
+    int rand_Y;
     std::vector<std::pair<int, int>> availablePositions;
     std::vector<std::pair<int, int>> notAvailablePositions;
 
@@ -39,6 +41,7 @@ public:
 
     void display_Malfoy(int, int, int);
     int rand_int(int);
+    void rand_pos();
     bool check_collisions(int, int, int);
 };
 

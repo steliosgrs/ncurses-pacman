@@ -171,17 +171,25 @@ void Engine::GenerateMap(){
 int Engine::rand_int(int max) {
     return ((int)rand() / ((int)RAND_MAX + 1.0)) * (max - 1);
 }
-
-// void Engine::GenerateMalfoy(int rand_X, int rand_Y){
-void Engine::GenerateMalfoy(){
-    int rand_X; 
-    int rand_Y; 
-
+void Engine::rand_pos(){
     do{
-        rand_X = rand_int(xMax);
-        rand_Y = rand_int(yMax);
+        this->rand_X = rand_int(this->xMax);
+        this->rand_Y = rand_int(this->yMax);
 
     }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
+    
+}
+// void Engine::GenerateMalfoy(int rand_X, int rand_Y){
+void Engine::GenerateMalfoy(){
+    rand_pos();
+    // int rand_X; 
+    // int rand_Y; 
+
+    // do{
+    //     rand_X = rand_int(xMax);
+    //     rand_Y = rand_int(yMax);
+
+    // }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
     
     player = new Malfoy(rand_X, rand_Y);
     player->set_xMax(xMax);
@@ -189,14 +197,15 @@ void Engine::GenerateMalfoy(){
     mvaddch(player->get_y(), player->get_x(), this->player->get_letter());
 }
 void Engine::GeneratePotter(){
-    int rand_X; 
-    int rand_Y; 
+    rand_pos();
+    // int rand_X; 
+    // int rand_Y; 
 
-    do{
-        rand_X = rand_int(xMax);
-        rand_Y = rand_int(yMax);
+    // do{
+    //     rand_X = rand_int(xMax);
+    //     rand_Y = rand_int(yMax);
 
-    }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
+    // }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
     
     bot_potter = new Potter(rand_X, rand_Y);
     bot_potter->set_xMax(xMax);
@@ -204,18 +213,19 @@ void Engine::GeneratePotter(){
     mvaddch(bot_potter->get_y(), bot_potter->get_x(), this->bot_potter->get_letter());
 }
 void Engine::GenerateGem(){
-    int rand_X; 
-    int rand_Y; 
+    rand_pos();
+    // int rand_X; 
+    // int rand_Y; 
 
-    do{
-        rand_X = rand_int(xMax);
-        rand_Y = rand_int(yMax);
+    // do{
+    //     rand_X = rand_int(xMax);
+    //     rand_Y = rand_int(yMax);
 
-    }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
+    // }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
     gem = new Gem(rand_X, rand_Y);
-    // gem->set_xMax(xMax);
-    // gem->set_yMax(yMax);
-    // mvaddch(gem->get_y(), gem->get_x(), this->gem->get_letter());
+    gem->set_xMax(xMax);
+    gem->set_yMax(yMax);
+    mvaddch(gem->get_y(), gem->get_x(), this->gem->get_letter());
 }
 bool Engine::check_collisions(int move, int x, int y){
     bool valid_move = false;

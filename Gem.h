@@ -1,21 +1,17 @@
 #ifndef _GEM_H
 #define _GEM_H_
 #include <ncurses.h>
-class Gem{
+#include "Movement.h"
 
-private:
-    int x;
-    int y;
-    char letter;
-    int xMax;
-    int yMax;
+class Gem: public Movement{
+
 public:
 
     // Constucturor
     Gem(int, int, char = 'G');
     ~Gem();
     
-    void spawn();
+    void spawn(int x, int y);
 
 };
 

@@ -1,12 +1,13 @@
 #include "Gem.h"
 
-Gem::Gem(int x, int y, char letter){
-    this->x = x;
-    this->y = y;
-    this->letter = letter;
+Gem::Gem(int x, int y, char letter): Movement(x, y, 'G') {
+}
+
+
+Gem::~Gem(){
 
 }
 
-Gem::~Gem(){
+void spawn(int x, int y){
 
 }
