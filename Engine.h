@@ -24,8 +24,10 @@ private:
     int xMax;
     int rand_X;
     int rand_Y;
+
     std::vector<std::pair<int, int>> availablePositions;
     std::vector<std::pair<int, int>> notAvailablePositions;
+    std::vector<std::pair<int, int>> entitiesPositions;
 
 public:
     Engine(const std::string map_filename);

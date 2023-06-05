@@ -14,8 +14,9 @@ Engine::Engine(const std::string map_filename){
     GenerateMap();
 
     srand(time(0));
-    int rand_X; 
-    int rand_Y; 
+    entitiesPositions.push_back(std::make_pair(-1,-1));
+    // int rand_X; 
+    // int rand_Y; 
 
     // do{
     //     rand_X = rand_int(xMax);
@@ -171,26 +172,32 @@ void Engine::GenerateMap(){
 int Engine::rand_int(int max) {
     return ((int)rand() / ((int)RAND_MAX + 1.0)) * (max - 1);
 }
+
 void Engine::rand_pos(){
     do{
         this->rand_X = rand_int(this->xMax);
         this->rand_Y = rand_int(this->yMax);
+        
+        for (int i = 0; i < entitiesPositions.size(); i++)
+        {
+            if ((entitiesPositions[i].first == rand_Y) and (entitiesPositions[i].second == rand_X) ){
+                this->rand_X = rand_int(this->xMax);
+                this->rand_Y = rand_int(this->yMax);
+            }else{
+                entitiesPositions.push_back(std::make_pair(rand_Y,rand_X));
+                break;
+
+            }
+            
+        }
+        
 
     }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
-    
 }
 // void Engine::GenerateMalfoy(int rand_X, int rand_Y){
 void Engine::GenerateMalfoy(){
     rand_pos();
-    // int rand_X; 
-    // int rand_Y; 
 
-    // do{
-    //     rand_X = rand_int(xMax);
-    //     rand_Y = rand_int(yMax);
-
-    // }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
-    
     player = new Malfoy(rand_X, rand_Y);
     player->set_xMax(xMax);
     player->set_yMax(yMax);
@@ -198,15 +205,7 @@ void Engine::GenerateMalfoy(){
 }
 void Engine::GeneratePotter(){
     rand_pos();
-    // int rand_X; 
-    // int rand_Y; 
 
-    // do{
-    //     rand_X = rand_int(xMax);
-    //     rand_Y = rand_int(yMax);
-
-    // }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
-    
     bot_potter = new Potter(rand_X, rand_Y);
     bot_potter->set_xMax(xMax);
     bot_potter->set_yMax(yMax);
@@ -214,14 +213,7 @@ void Engine::GeneratePotter(){
 }
 void Engine::GenerateGem(){
     rand_pos();
-    // int rand_X; 
-    // int rand_Y; 
-
-    // do{
-    //     rand_X = rand_int(xMax);
-    //     rand_Y = rand_int(yMax);
-
-    // }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
+    
     gem = new Gem(rand_X, rand_Y);
     gem->set_xMax(xMax);
     gem->set_yMax(yMax);
