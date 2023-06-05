@@ -15,38 +15,14 @@ Engine::Engine(const std::string map_filename){
 
     srand(time(0));
     entitiesPositions.push_back(std::make_pair(-1,-1));
-    // int rand_X; 
-    // int rand_Y; 
 
-    // do{
-    //     rand_X = rand_int(xMax);
-    //     rand_Y = rand_int(yMax);
-
-    // }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
     GenerateMalfoy();
     GeneratePotter();
     GenerateGem();
 
-    /*
-    player = new Malfoy(rand_X, rand_Y);
-    player->set_xMax(xMax);
-    player->set_yMax(yMax);
-    mvaddch(player->get_y(), player->get_x(), this->player->get_letter());
-    */
-
     // Check Move
     int move = 0;
-    // ====== Working ======
-    // do {
-    //     int x = player->get_x();
-    //     int y = player->get_y();
-    //     display_Malfoy(move, y, x);
-    //     move = player->move(x, y);
-    //     if (move == 27){
-    //         break;
-    //     }
-    //     wrefresh(window);
-    // } while ( move != 27);
+
     int pos_y, pos_x, x, y;
     
 
@@ -56,42 +32,6 @@ Engine::Engine(const std::string map_filename){
         y = player->get_y();
         display_Malfoy(move, y, x);
         move = player->move(x, y);
-        /*
-        do {
-
-            move = player->move(x, y);
-            if (mapHandler[player->get_y()].at(player->get_x()) == '*'){
-
-            }
-            // for (int i = 0; i < notAvailablePositions.size(); i++)
-            // {
-            //     pos_y = notAvailablePositions[i].first; 
-            //     pos_x = notAvailablePositions[i].second;
-            //     if ((pos_y == y) or (pos_x == x)){
-            //         not_valid = true;
-            //     }
-            //     else{
-            //         not_valid = false;
-            //     }
-            // }
-            
-        } while (not_valid);
-        
-        
-        do {
-            move = player->move(x, y);
-
-            for (int i = 0; i < notAvailablePositions.size(); i++)
-            {
-                int pos_y = notAvailablePositions[i].first; 
-                int pos_x = notAvailablePositions[i].second;
-                if (pos_y == y and pos_x == x){
-                    valid = false;
-                }
-            }
-            
-        }while (valid == true);
-        */
 
         if (move == 27){
             break;
@@ -165,7 +105,6 @@ void Engine::GenerateMap(){
 
     }
     xMax = mapHandler[0].size()-1;
-    // std::cout << "xmax:" <<xMax << "ymax:"<< yMax << std::endl;
     wrefresh(window);
 
 }
@@ -182,7 +121,7 @@ void Engine::rand_pos(){
         {
             if ((entitiesPositions[i].first == rand_Y) and (entitiesPositions[i].second == rand_X) ){
                 this->rand_X = rand_int(this->xMax);
-                gthis->rand_Y = rand_int(this->yMax);
+                this->rand_Y = rand_int(this->yMax);
             }else{
                 entitiesPositions.push_back(std::make_pair(rand_Y,rand_X));
                 break;
