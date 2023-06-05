@@ -182,7 +182,7 @@ void Engine::rand_pos(){
         {
             if ((entitiesPositions[i].first == rand_Y) and (entitiesPositions[i].second == rand_X) ){
                 this->rand_X = rand_int(this->xMax);
-                this->rand_Y = rand_int(this->yMax);
+                gthis->rand_Y = rand_int(this->yMax);
             }else{
                 entitiesPositions.push_back(std::make_pair(rand_Y,rand_X));
                 break;
