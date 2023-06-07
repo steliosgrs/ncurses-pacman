@@ -94,11 +94,8 @@ void Engine::GenerateMap(){
             if (mapHandler[row][col] == '*' ){
                 mvwaddch(window,row, col, '*');
                 notAvailablePositions.push_back(std::make_pair(row,col));
-            }else if (mapHandler[row][col] == ','){
-                // mvaddch(row, col,' ');
-                // continue;
             } else
-                mvwaddch(window,row, col,' ');
+                mvwaddch(window,row, col,'.');
                 availablePositions.push_back(std::make_pair(row,col));
         }
         yMax++;
@@ -131,7 +128,7 @@ void Engine::rand_pos(){
         }
         
 
-    }while (mapHandler[rand_Y][rand_X] == '*' or  mapHandler[rand_Y][rand_X] == ' ');
+    }while (mapHandler[rand_Y][rand_X] == '*');// or  mapHandler[rand_Y][rand_X] == ' ');
 }
 // void Engine::GenerateMalfoy(int rand_X, int rand_Y){
 void Engine::GenerateMalfoy(){
@@ -175,18 +172,18 @@ void Engine::display_Malfoy(int move, int y, int x){
     switch (move){
         case KEY_UP:
             
-            mvaddch(y+1,x, ' ');
+            mvaddch(y+1,x, '.');
             break;
         case KEY_DOWN:
-            mvaddch(y-1,x, ' ');
+            mvaddch(y-1,x, '.');
             break;
         
         case KEY_RIGHT:
-            mvaddch(y,x-1, ' ');
+            mvaddch(y,x-1, '.');
             break;
         
         case KEY_LEFT:
-            mvaddch(y,x+1, ' ');
+            mvaddch(y,x+1, '.');
             break;
         }
     
