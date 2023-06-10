@@ -35,10 +35,12 @@ public:
     void StartCurses();
     void ReadMapFile(const std::string &);
     void GenerateMap();
+
     void GenerateMalfoy();
-    // void GenerateMalfoy(int, int);
     void GeneratePotter();
     void GenerateGem();
+    void CreateEntities();
+    
     // std::pair<int, int> PickRandomPosition();
 
     void display_Malfoy(int, int, int);

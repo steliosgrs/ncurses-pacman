@@ -16,9 +16,7 @@ Engine::Engine(const std::string map_filename){
     srand(time(0));
     entitiesPositions.push_back(std::make_pair(-1,-1));
 
-    GenerateMalfoy();
-    GeneratePotter();
-    GenerateGem();
+    CreateEntities();
 
     // Check Move
     int move = 0;
@@ -105,6 +103,7 @@ void Engine::GenerateMap(){
     wrefresh(window);
 
 }
+
 int Engine::rand_int(int max) {
     return ((int)rand() / ((int)RAND_MAX + 1.0)) * (max - 1);
 }
@@ -114,46 +113,46 @@ void Engine::rand_pos(){
         this->rand_X = rand_int(this->xMax);
         this->rand_Y = rand_int(this->yMax);
         
-        for (int i = 0; i < entitiesPositions.size(); i++)
-        {
+        for (int i = 0; i < entitiesPositions.size(); i++){
             if ((entitiesPositions[i].first == rand_Y) and (entitiesPositions[i].second == rand_X) ){
                 this->rand_X = rand_int(this->xMax);
                 this->rand_Y = rand_int(this->yMax);
             }else{
                 entitiesPositions.push_back(std::make_pair(rand_Y,rand_X));
                 break;
-
             }
-            
         }
-        
-
-    }while (mapHandler[rand_Y][rand_X] == '*');// or  mapHandler[rand_Y][rand_X] == ' ');
+            }while (mapHandler[rand_Y][rand_X] == '*');
 }
-// void Engine::GenerateMalfoy(int rand_X, int rand_Y){
+
 void Engine::GenerateMalfoy(){
     rand_pos();
-
     player = new Malfoy(rand_X, rand_Y);
     player->set_xMax(xMax);
     player->set_yMax(yMax);
-    mvaddch(player->get_y(), player->get_x(), this->player->get_letter());
+    // mvaddch(player->get_y(), player->get_x(), this->player->get_letter());
 }
+
 void Engine::GeneratePotter(){
     rand_pos();
-
     bot_potter = new Potter(rand_X, rand_Y);
     bot_potter->set_xMax(xMax);
     bot_potter->set_yMax(yMax);
     mvaddch(bot_potter->get_y(), bot_potter->get_x(), this->bot_potter->get_letter());
 }
+
 void Engine::GenerateGem(){
     rand_pos();
-    
     gem = new Gem(rand_X, rand_Y);
     gem->set_xMax(xMax);
     gem->set_yMax(yMax);
     mvaddch(gem->get_y(), gem->get_x(), this->gem->get_letter());
+}
+
+void Engine::CreateEntities(){
+    GenerateMalfoy();
+    GeneratePotter();
+    GenerateGem();
 }
 bool Engine::check_collisions(int move, int x, int y){
     bool valid_move = false;
@@ -163,7 +162,6 @@ bool Engine::check_collisions(int move, int x, int y){
     }else {
         return valid_move;
     }
-
 }
 
 
@@ -171,7 +169,6 @@ void Engine::display_Malfoy(int move, int y, int x){
     bool valid_move;
     switch (move){
         case KEY_UP:
-            
             mvaddch(y+1,x, '.');
             break;
         case KEY_DOWN:
