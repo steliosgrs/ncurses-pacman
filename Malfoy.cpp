@@ -9,9 +9,6 @@ Malfoy::Malfoy(int x, int y, char letter): Movement(x, y, 'L') {
 int Malfoy::move(int x, int y){
     
     int char_move = getch();
-    // std::string space = " ";
-    // int s = atoi(space.c_str());
-    // int s = std::stoi(space);
 
     switch (char_move){
         case KEY_UP:

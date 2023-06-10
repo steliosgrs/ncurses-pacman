@@ -19,16 +19,25 @@ Engine::Engine(const std::string map_filename){
     CreateEntities();
 
     // Check Move
-    int move = 0;
-    int pos_y, pos_x, x, y;
+    int move = 32;
+    // int prev_y =  prev_x = 0; 
+    int x, y;
     bool not_valid = true;
     int counter_gem = 0;
 
+
     while ( move != 27){
+        
         x = player->get_x();
         y = player->get_y();
+        
         make_move(move, y, x);
         move = player->move(x, y);
+        while (mapHandler[player->get_y()][player->get_x()] == '*'){
+            make_move(move, y, x);
+            move = player->move(x, y);
+
+        }
 
         if (move == 27){
             break;
