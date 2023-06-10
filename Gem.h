@@ -11,7 +11,7 @@ public:
     Gem(int, int, char = 'G');
     ~Gem();
     
-    void spawn(int x, int y);
+    void spawn(int, int);
 
 };
 

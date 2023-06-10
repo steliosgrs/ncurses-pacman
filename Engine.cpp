@@ -20,25 +20,35 @@ Engine::Engine(const std::string map_filename){
 
     // Check Move
     int move = 0;
-
     int pos_y, pos_x, x, y;
-    
-
     bool not_valid = true;
+    int counter_gem = 0;
+
     while ( move != 27){
         x = player->get_x();
         y = player->get_y();
-        display_Malfoy(move, y, x);
+        make_move(move, y, x);
         move = player->move(x, y);
 
         if (move == 27){
             break;
         }
+        if (counter_gem == 15){
+            rand_pos();
+            gem->spawn(rand_X, rand_Y);
+            counter_gem = 0;
+        }
+        if (move != 32){
+            counter_gem+=1;
+        }
+
         wrefresh(window);
     } 
     // Refresh the window
     // wrefresh(window);
     delete player;
+    delete bot_potter;
+    delete gem;
 }
 
 // Destructor
@@ -110,6 +120,7 @@ int Engine::rand_int(int max) {
 
 void Engine::rand_pos(){
     do{
+        // Create a random X,Y
         this->rand_X = rand_int(this->xMax);
         this->rand_Y = rand_int(this->yMax);
         
@@ -122,7 +133,8 @@ void Engine::rand_pos(){
                 break;
             }
         }
-            }while (mapHandler[rand_Y][rand_X] == '*');
+        // Check if it is wall
+        }while (mapHandler[rand_Y][rand_X] == '*');
 }
 
 void Engine::GenerateMalfoy(){
@@ -154,6 +166,7 @@ void Engine::CreateEntities(){
     GeneratePotter();
     GenerateGem();
 }
+
 bool Engine::check_collisions(int move, int x, int y){
     bool valid_move = false;
     if (mapHandler[y][x] == '*' ){
@@ -165,8 +178,8 @@ bool Engine::check_collisions(int move, int x, int y){
 }
 
 
-void Engine::display_Malfoy(int move, int y, int x){
-    bool valid_move;
+// Rerender the map with .
+void Engine::renderPath(int move, int y, int x){
     switch (move){
         case KEY_UP:
             mvaddch(y+1,x, '.');
@@ -183,10 +196,22 @@ void Engine::display_Malfoy(int move, int y, int x){
             mvaddch(y,x+1, '.');
             break;
         }
-    
+}
+
+void Engine::make_move(int move, int y, int x){
+    bool valid_move;
+    renderPath(move, y, x);
+
+    // Move Player
     mvaddch(y, x, this->player->get_letter());
-    // mvaddch(y, x, this->player->get_letter());
-    // }
-    // wrefresh(window);
+    // Move AI Bot
+    // move_AI(move, y+1, x+1);
+}
+
+void Engine::move_AI(int move, int y, int x){
+    bool valid_move;
+    renderPath(move, y, x);
+    mvaddch(y, x, this->bot_potter->get_letter());
+    // mvaddch(this->bot_potter->get_y(), this->bot_potter->get_x(), this->bot_potter->get_letter());
 }
 

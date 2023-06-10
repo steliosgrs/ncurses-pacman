@@ -8,7 +8,7 @@ class Malfoy: public Movement{
 
 public:
     Malfoy(int x, int y, char letter = 'L');
-    // ~Malfoy();
+    // virtual ~Malfoy();
 
     // // Getters
     // // Setters

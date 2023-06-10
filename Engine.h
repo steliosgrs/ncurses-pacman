@@ -40,12 +40,14 @@ public:
     void GeneratePotter();
     void GenerateGem();
     void CreateEntities();
-    
-    // std::pair<int, int> PickRandomPosition();
 
-    void display_Malfoy(int, int, int);
+    // std::pair<int, int> PickRandomPosition();
     int rand_int(int);
     void rand_pos();
+
+    void renderPath(int, int, int);
+    void make_move(int, int, int);
+    void move_AI(int, int, int);
     bool check_collisions(int, int, int);
 };
 
