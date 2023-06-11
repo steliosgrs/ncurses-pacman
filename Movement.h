@@ -12,18 +12,15 @@ protected:
     char letter;
     int xMax;
     int yMax;
-    // char direction;
 
 public:
-    Movement(int x, int y, char letter);//, char direction);
-    // virtual ~Movement();
-    ~Movement();
+    Movement(int x, int y, char letter);
+    virtual ~Movement();
 
     // Getters
     int get_x() const;
     int get_y() const;
     char get_letter() const;
-    // char get_direction() const;
     int get_xMax() const;
     int get_yMax() const;
 
@@ -35,7 +32,7 @@ public:
     void set_xMax(int);
     void set_yMax(int);
     // Methods
-    virtual int move(int x, int y);
+    int move(int x, int y);
     
 };
 

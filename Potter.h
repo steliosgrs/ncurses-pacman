@@ -8,9 +8,9 @@ class Potter: public Movement{
 
 public:
     Potter(int x, int y, char letter = 'M');
-    // ~Malfoy();
+    ~Potter();
 
-    int move(int, int);
+    int AImove(int);
     
 };
 

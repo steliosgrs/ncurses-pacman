@@ -33,22 +33,28 @@ public:
     Engine(const std::string map_filename);
     ~Engine();
     void StartCurses();
+
     void ReadMapFile(const std::string &);
     void GenerateMap();
+    
+    void initColors();
+
 
     void GenerateMalfoy();
     void GeneratePotter();
     void GenerateGem();
-    void CreateEntities();
 
-    // std::pair<int, int> PickRandomPosition();
+    void DisplayEntities();
+    void RestartRound();
+
     int rand_int(int);
     void rand_pos();
 
     void renderPath(int, int, int);
     void make_move(int, int, int);
-    void move_AI(int, int, int);
-    bool check_collisions(int, int, int);
+    void move_AI(int, int);
+
+    // bool check_collisions(int, int, int);
 };
 
 #endif

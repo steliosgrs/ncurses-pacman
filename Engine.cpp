@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Engine.h"
 // #include "Malfoy.h"
 #include <time.h>
@@ -11,19 +10,23 @@ Engine::Engine(const std::string map_filename){
     StartCurses();
     ReadMapFile(map_filename);
     window = newwin(height_map,width_map,0,0);
+    attron(A_STANDOUT);
+    
     GenerateMap();
+    attroff(A_STANDOUT);
+    
 
     srand(time(0));
     entitiesPositions.push_back(std::make_pair(-1,-1));
-
-    CreateEntities();
+    // CreateEntities(); 
+    DisplayEntities();
 
     // Check Move
     int move = 32;
     // int prev_y =  prev_x = 0; 
     int x, y;
     bool not_valid = true;
-    int counter_gem = 0;
+    int respawn_counter = 0;
 
 
     while ( move != 27){
@@ -34,27 +37,26 @@ Engine::Engine(const std::string map_filename){
         make_move(move, y, x);
         move = player->move(x, y);
         while (mapHandler[player->get_y()][player->get_x()] == '*'){
-            make_move(move, y, x);
+            // make_move(move, y, x);
             move = player->move(x, y);
 
         }
-
         if (move == 27){
             break;
         }
-        if (counter_gem == 15){
+        if (respawn_counter == gem->get_life_ofGEM()){
             rand_pos();
             gem->spawn(rand_X, rand_Y);
-            counter_gem = 0;
+            respawn_counter = 0;
         }
         if (move != 32){
-            counter_gem+=1;
+            respawn_counter+=1;
         }
 
         wrefresh(window);
     } 
     // Refresh the window
-    // wrefresh(window);
+    wrefresh(window);
     delete player;
     delete bot_potter;
     delete gem;
@@ -64,21 +66,18 @@ Engine::Engine(const std::string map_filename){
 Engine::~Engine(){
     delwin(window);
     clear();
-    // werase(window);
-    // endwin(); 
     endwin(); 
 }
 
 void Engine::StartCurses(){
     // Initialize the screen, setup memory
     initscr(); 
-    // 
+    // start_color();
+
     noecho();
     cbreak();
     intrflush(stdscr, FALSE);
-
     set_escdelay(0);
-
     // Arrows
     keypad(stdscr, TRUE);
     // Memory refresh
@@ -123,6 +122,13 @@ void Engine::GenerateMap(){
 
 }
 
+void Engine::initColors(){
+    init_pair(1, COLOR_RED, COLOR_BLACK);
+    init_pair(2, COLOR_GREEN, COLOR_WHITE);
+    init_pair(3, COLOR_BLUE, COLOR_WHITE);
+
+}
+
 int Engine::rand_int(int max) {
     return ((int)rand() / ((int)RAND_MAX + 1.0)) * (max - 1);
 }
@@ -159,7 +165,9 @@ void Engine::GeneratePotter(){
     bot_potter = new Potter(rand_X, rand_Y);
     bot_potter->set_xMax(xMax);
     bot_potter->set_yMax(yMax);
-    mvaddch(bot_potter->get_y(), bot_potter->get_x(), this->bot_potter->get_letter());
+    // attron(COLOR_PAIR(2));
+    // mvaddch(bot_potter->get_y(), bot_potter->get_x(), this->bot_potter->get_letter());
+    // attroff(COLOR_PAIR(2));
 }
 
 void Engine::GenerateGem(){
@@ -167,15 +175,18 @@ void Engine::GenerateGem(){
     gem = new Gem(rand_X, rand_Y);
     gem->set_xMax(xMax);
     gem->set_yMax(yMax);
+    // attron(COLOR_PAIR(3));
     mvaddch(gem->get_y(), gem->get_x(), this->gem->get_letter());
+    // attroff(COLOR_PAIR(3));
 }
 
-void Engine::CreateEntities(){
+void Engine::DisplayEntities(){
     GenerateMalfoy();
     GeneratePotter();
     GenerateGem();
 }
 
+/* 
 bool Engine::check_collisions(int move, int x, int y){
     bool valid_move = false;
     if (mapHandler[y][x] == '*' ){
@@ -185,10 +196,12 @@ bool Engine::check_collisions(int move, int x, int y){
         return valid_move;
     }
 }
+*/
 
-
-// Rerender the map with .
+// Rerender the map with . (path)
 void Engine::renderPath(int move, int y, int x){
+    // attron(A_STANDOUT);
+    attron(COLOR_PAIR(0));
     switch (move){
         case KEY_UP:
             mvaddch(y+1,x, '.');
@@ -205,22 +218,49 @@ void Engine::renderPath(int move, int y, int x){
             mvaddch(y,x+1, '.');
             break;
         }
+    // attroff(A_STANDOUT);
+    attroff(COLOR_PAIR(0));
 }
 
 void Engine::make_move(int move, int y, int x){
-    bool valid_move;
+    // bool valid_move;
     renderPath(move, y, x);
 
     // Move Player
+    attron(COLOR_PAIR(0));
     mvaddch(y, x, this->player->get_letter());
+    attroff(COLOR_PAIR(0));
     // Move AI Bot
-    // move_AI(move, y+1, x+1);
+    srand(time(NULL));
+    
+    move_AI(this->bot_potter->get_y(), this->bot_potter->get_x());
 }
 
-void Engine::move_AI(int move, int y, int x){
-    bool valid_move;
-    renderPath(move, y, x);
-    mvaddch(y, x, this->bot_potter->get_letter());
-    // mvaddch(this->bot_potter->get_y(), this->bot_potter->get_x(), this->bot_potter->get_letter());
+void Engine::move_AI(int y, int x){
+    
+    // bool valid_move;
+    int choise = (int)rand()%4;
+    int ai_move;
+    switch (choise){
+    case 0:
+        ai_move = KEY_UP;
+        break;
+    case 1:
+        ai_move = KEY_DOWN;
+        break;
+    case 2:
+        ai_move = KEY_RIGHT;
+        break;
+    case 3:
+        ai_move = KEY_LEFT;
+        break;
+    
+    default:
+        break;
+    }
+    bot_potter->AImove(ai_move);
+    // renderPath(ai_move, y, x);
+    renderPath(ai_move, this->bot_potter->get_y(), this->bot_potter->get_x());
+    mvaddch(this->bot_potter->get_y(), this->bot_potter->get_x(), this->bot_potter->get_letter());
 }
 
